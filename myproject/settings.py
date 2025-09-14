@@ -11,9 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x%*=6=cze=ey)6qfqg^_6i_%2+eo)rh&ud=-k2p7k9gsx0nxoq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['turlan91.pythonanywhere.com']
 
 # Application definition
 
@@ -105,8 +104,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-MEDIA_ROOT = r"C:\MCur\fridge"
-MEDIA_URL = "/media/"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Папка для загружаемых файлов
+MEDIA_ROOT = os.path.join(BASE_DIR, 'fridge')
+MEDIA_URL = '/media/'
 
