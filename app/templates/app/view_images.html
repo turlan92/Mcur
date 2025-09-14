@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Фото Raspberry Pi</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 20px; }
+        h1 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+        th { background: #eee; }
+        img { max-width: 200px; height: auto; }
+        .sort-link { text-decoration: none; font-size: 0.9em; }
+        .filter-form { text-align:center; margin-bottom:20px; }
+        input[type=datetime-local] { padding: 5px; }
+        button { padding:5px 10px; }
+    </style>
+</head>
+<body>
+    <h1>Фото Raspberry Pi</h1>
+
+    <div class="filter-form">
+        <form method="get">
+            <label>С:
+                <input type="datetime-local" name="from" value="{{ date_from }}">
+            </label>
+            <label>По:
+                <input type="datetime-local" name="to" value="{{ date_to }}">
+            </label>
+            <button type="submit">Применить</button>
+        </form>
+        <div style="margin-top:10px;">
+            <a href="?sort=asc" class="sort-link">Сначала старые</a> |
+            <a href="?sort=desc" class="sort-link">Сначала новые</a>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Камера</th>
+                <th>Время Pi</th>
+                <th>Время сервера</th>
+                <th>Фото</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for img in images %}
+            <tr>
+                <td>{{ img.camera }}</td>
+                <td>{{ img.timestamp }}</td>
+                <td>{{ img.received }}</td>
+                <td><img src="{{ img.image.url }}" alt="Фото"></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Фото не найдено</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
